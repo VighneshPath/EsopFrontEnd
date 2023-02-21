@@ -1,4 +1,4 @@
-function updateEsopDiv() {
+const updateEsopDiv = () => {
   let orderEsopDiv = document.getElementById("order-esop-type");
   let typeSelect = document.getElementById("order-type");
 
@@ -15,4 +15,4 @@ function updateEsopDiv() {
   } else {
     orderEsopDiv.innerHTML = "";
   }
-}
+};

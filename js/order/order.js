@@ -1,13 +1,5 @@
-function placeOrder(event) {
-  let quantity = document.getElementById("order-quantity").value;
-  let price = document.getElementById("order-price").value;
-  let type = document.getElementById("order-type").value;
-
-  let orderData = {
-    quantity,
-    price,
-    type,
-  };
+const placeOrder = (event) => {
+  let orderData = getOrderDataFromOrderForm();
 
   createOrder(
     orderData,
