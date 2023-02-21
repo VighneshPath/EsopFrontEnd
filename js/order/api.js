@@ -3,7 +3,6 @@ const createOrder = (
   successResponse = () => {},
   failureResponse = () => {}
 ) => {
-  console.log(api.user.order.createOrder(config.userName));
   fetch(api.user.order.createOrder(config.userName), {
     method: "POST",
     headers: {
