@@ -3,14 +3,20 @@ const placeOrder = (event) => {
 
   createOrder(
     orderData,
-    (data) => {
-      console.log(data);
+    (orderResponse) => {
+      successfulOrder(orderResponse);
     },
-    (error) => {
-      console.log(error);
+    ({ errors }) => {
+      unSuccessfulOrder(errors);
     }
   );
   event.preventDefault();
 
   return false;
-}
+};
+
+const successfulOrder = (orderResponse) => {};
+
+const unSuccessfulOrder = (errors) => {
+  console.log(errors);
+};

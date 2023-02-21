@@ -11,7 +11,17 @@ const createOrder = (
     },
     body: JSON.stringify(data),
   })
-    .then((response) => response.json())
-    .then((data) => successResponse(data))
-    .catch((e) => failureResponse(e));
+    .then((response) => {
+      if (response.ok) {
+        return response.json();
+      }
+      return Promise.reject(response);
+    })
+    .then((data) => {
+      console.log(data);
+      successResponse(data);
+    })
+    .catch((error) => {
+      error.json().then((json) => failureResponse(json));
+    });
 };
