@@ -19,7 +19,7 @@ const successfulOrder = (orderResponse) => {
   let orderDetails = "";
 
   for (let details in orderResponse) {
-    orderDetails += `<p>${details}: ${orderResponse[details]}</p>`;
+    orderDetails += `<div style="clear: both;"><p class="alignleft">${details}</p> <p class="alignright">${orderResponse[details]}</p></div>`;
   }
 
   console.log(orderDetails);
@@ -29,9 +29,11 @@ const successfulOrder = (orderResponse) => {
           <h1>
               Your order has been placed successfully!!!!
           </h1>
-          <h3>Order Details: </h3>
           <div id="order-details">
+          <h3>Order Details: </h3>
+          <div>
             ${orderDetails}
+          </div>
           </div>
       </div>
   `;

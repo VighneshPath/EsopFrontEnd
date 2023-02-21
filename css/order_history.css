@@ -1,20 +1,24 @@
-pre {
-  outline: 1px solid #ccc;
-  padding: 5px;
-  margin: 5px;
+div h3.banner {
+  text-align: center;
+  margin: 30px;
 }
-.string {
-  color: green;
+
+#order-history-table {
+  border-collapse: collapse;
+  margin: auto;
+  width: 80%;
 }
-.number {
-  color: darkorange;
+
+#order-history-table td,
+#order-history-table th {
+  border: 1px solid #ddd;
+  padding: 8px;
 }
-.boolean {
-  color: blue;
-}
-.null {
-  color: magenta;
-}
-.key {
-  color: red;
+
+#order-history-table th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #adf1d2;
+  color: black;
 }

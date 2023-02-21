@@ -14,16 +14,24 @@ const orderHistory = () => {
 };
 
 const successfulOrderHistory = (orderHistoryResponse) => {
-  let orderHistoryDiv = document.getElementById("order-history");
-  console.log(orderHistoryResponse);
-  console.log(orderHistoryDiv);
-
-  let orderHistoryOutput = prettifyOrderHistory(
-    JSON.stringify(orderHistoryResponse, undefined, 4)
+  let orderHistoryTableBody = document.getElementById(
+    "order-history-table-body"
   );
 
-  orderHistoryDiv.appendChild(document.createElement("pre")).innerHTML =
-    orderHistoryOutput;
+  orderHistoryResponse.map((order, index) => {
+    let tableRow = "";
+    Object.keys(order)
+      .filter((key) => {
+        return key !== "filled";
+      })
+      .map((key) => {
+        tableRow += `<td>${order[key]}</td>`;
+      });
+    tableRow += `<td>-</td>`;
+
+    orderHistoryTableBody.appendChild(document.createElement("tr")).innerHTML =
+      tableRow;
+  });
 };
 
 const unSuccessfulOrderHistory = (errors) => {

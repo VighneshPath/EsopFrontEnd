@@ -40,7 +40,4 @@ const getOrderHistory = (
       console.log(data);
       successResponse(data);
     });
-  // .catch((error) => {
-  //   error.json().then((json) => failureResponse(json));
-  // });
 };

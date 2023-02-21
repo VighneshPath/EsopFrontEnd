@@ -1,6 +1,6 @@
 input[type="text"],
 select {
-  width: 100%;
+  width: 150%;
   padding: 12px 20px;
   margin: 8px 0;
   display: inline-block;
@@ -10,7 +10,7 @@ select {
 }
 
 button[type="submit"] {
-  width: 100%;
+  width: 150%;
   background-color: #5da082;
   color: white;
   padding: 14px 20px;
@@ -22,4 +22,24 @@ button[type="submit"] {
 
 button[type="submit"]:hover {
   background-color: #45a049;
+}
+
+#order-response div h1 {
+  margin-bottom: 50px;
+}
+div #order-details {
+  width: 50%;
+  display: block;
+  margin: auto;
+  text-align: center;
+  border: #5da082 2px solid;
+  padding: 10px 20px 40px 20px;
+  border-radius: 5px;
+}
+
+p.alignleft {
+  float: left;
+}
+p.alignright {
+  float: right;
 }

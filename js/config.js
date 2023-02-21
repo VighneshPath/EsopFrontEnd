@@ -1,5 +1,5 @@
 const config = {
-  baseURL: "http://192.168.1.210",
+  baseURL: "http://localhost",
   port: "8080",
   userName: "amaan",
 };
