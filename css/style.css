@@ -1,0 +1,45 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Oxygen", sans-serif;
+  letter-spacing: 0.05em;
+}
+
+body div.navbar {
+  height: 10vh;
+  background-color: rgb(116, 214, 214);
+}
+
+body div.container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+body form div.form-group {
+  padding: 0.5em;
+}
+
+pre {
+  outline: 1px solid #ccc;
+  padding: 5px;
+  margin: 5px;
+}
+.string {
+  color: green;
+}
+.number {
+  color: darkorange;
+}
+.boolean {
+  color: blue;
+}
+.null {
+  color: magenta;
+}
+.key {
+  color: red;
+}

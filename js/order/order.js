@@ -26,10 +26,10 @@ const successfulOrder = (orderResponse) => {
 
   let successfulOrderDetails = `
       <div>
-          <h3>
+          <h1>
               Your order has been placed successfully!!!!
-          </h3>
-          <h5>Order Details: </h5>
+          </h1>
+          <h3>Order Details: </h3>
           <div id="order-details">
             ${orderDetails}
           </div>
@@ -37,7 +37,7 @@ const successfulOrder = (orderResponse) => {
   `;
 
   let formBody = document.getElementById("place-order-form");
-  document.getElementsByTagName("body")[0].removeChild(formBody);
+  document.getElementById("order-content").removeChild(formBody);
 
   let orderResponseDiv = document.getElementById("order-response");
   orderResponseDiv.innerHTML = successfulOrderDetails;

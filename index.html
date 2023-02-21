@@ -11,7 +11,16 @@
     <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
-    <div class="container">
+    <div class="navbar">
+        <div class="nav-head">
+            ESOP Trading
+        </div>
+        <div class="nav-items">
+            <div class="nav-item"><a href="#">Place Order</a> </div>
+            <div class="nav-item"><a href="/order_history.html">Order History</a></div>
+        </div>
+    </div>
+    <div class="container" id="order-content">
         <form id="place-order-form" method="post" onsubmit="return placeOrder(event)">
             <div class="form-group">
                 <label for="order-quantity">Quantity</label>
@@ -31,11 +40,11 @@
                 </select>
             </div>
             
+            <div id="order-esop-type" class="form-group"></div>
             <div id="order-esop-type" class="form-group">
-
+                <button type="submit">Place Order</button>
             </div>
 
-            <button type="submit">Place Order</button>
         
         </form>
         <div id="order-response"></div>
