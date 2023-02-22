@@ -1,5 +1,5 @@
 const updateEsopDiv = () => {
-  let orderEsopDiv = document.getElementById("order-esop-type");
+  let orderEsopDiv = document.getElementById("order-esop-type-div");
   let typeSelect = document.getElementById("order-type");
 
   let newELement = ` 
