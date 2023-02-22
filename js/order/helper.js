@@ -1,4 +1,4 @@
-import { htmlElements } from "../../constants/htmlElements";
+import { htmlElements } from "../../constants/htmlElements.js";
 
 class OrderHelper {
   successfulOrder = (orderResponse) => {
@@ -28,19 +28,6 @@ class OrderHelper {
     }
     let orderResponseDiv = document.getElementById("order-response");
     orderResponseDiv.innerHTML = errorDetails;
-  };
-
-  updateEsopDiv = () => {
-    let orderEsopDiv = document.getElementById("order-esop-type-div");
-    let typeSelect = document.getElementById("order-type");
-
-    let newELement = htmlElements.order.esopDiv;
-
-    if (typeSelect.value === "SELL") {
-      orderEsopDiv.innerHTML = newELement;
-    } else {
-      orderEsopDiv.innerHTML = "";
-    }
   };
 
   getOrderDataFromOrderForm = () => {

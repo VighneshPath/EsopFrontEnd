@@ -1,3 +1,5 @@
+import { api } from "../apis/api.js";
+import { config } from "../config.js";
 class OrderAPI {
   createOrder = (
     data,

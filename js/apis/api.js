@@ -1,5 +1,7 @@
+import { config } from "../config.js";
+
 const URL = `${config.baseURL}:${config.port}`;
-const api = {
+export const api = {
   user: {
     order: {
       createOrder: (userName) => `${URL}/user/${userName}/order`,
