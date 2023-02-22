@@ -1,6 +1,6 @@
 import { htmlElements } from "../../constants/htmlElements.js";
 
-class OrderHelper {
+export default class OrderHelper {
   successfulOrder = (orderResponse) => {
     let orderDetails = "";
 
@@ -19,6 +19,7 @@ class OrderHelper {
 
     let orderResponseDiv = document.getElementById("order-response");
     orderResponseDiv.innerHTML = successfulOrderDetails;
+    return successfulOrderDetails;
   };
 
   unSuccessfulOrder = (errors) => {

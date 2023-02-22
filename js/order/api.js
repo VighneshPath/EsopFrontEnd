@@ -1,6 +1,6 @@
 import { api } from "../apis/api.js";
 import { config } from "../config.js";
-class OrderAPI {
+export default class OrderAPI {
   createOrder = (
     data,
     successResponse = () => {},

@@ -1,4 +1,4 @@
-class OrderHistoryAPI {
+export default class OrderHistoryAPI {
   getOrderHistory = (
     successResponse = () => {},
     failureResponse = () => {}

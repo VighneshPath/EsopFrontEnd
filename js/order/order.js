@@ -1,3 +1,4 @@
+import OrderHelper from "./helper.js";
 export default class Order {
   orderHelper = new OrderHelper();
   placeOrder = (event) => {
