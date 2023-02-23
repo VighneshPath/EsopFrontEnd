@@ -1,0 +1,19 @@
+{
+  "dependencies": {
+    "n": "^9.0.1"
+  },
+  "name": "esopfrontend",
+  "description": "",
+  "version": "1.0.0",
+  "main": "index.js",
+  "devDependencies": {
+    "jest": "^29.4.3"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module"
+}

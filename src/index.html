@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ESOP Trading Platform</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/place_order.css">
+</head>
+<body>
+    <div class="navbar">
+        <div class="nav-head">
+            ESOP Trading
+        </div>
+        <div class="nav-items">
+            <div class="nav-item"><a href="#">Place Order</a> </div>
+            <div class="nav-item"><a href="/order_history.html">Order History</a></div>
+        </div>
+    </div>
+    <div class="container" id="order-content">
+        <form id="place-order-form" method="post" onsubmit="return placeOrder(event)">
+            <div class="form-group">
+                <label for="order-quantity">Quantity</label>
+                <input type="text" class="text-input" placeholder="Enter quantity" name="order-quantity" id="order-quantity">
+            </div>
+
+            <div class="form-group">
+                <label for="order-price">Price</label>
+                <input type="text" class="text-input" placeholder="Enter price" name="order-price" id="order-price">
+            </div>
+
+            <div class="form-group">
+                <label for="order-type">Type</label>
+                <select name="order-type" id="order-type" onchange="updateEsopDiv(event)">
+                    <option value="BUY">Buy</option>
+                    <option value="SELL">Sell</option>
+                </select>
+            </div>
+            
+            <div id="order-esop-type-div" class="form-group"></div>
+            <div class="form-group">
+                <button type="submit">Place Order</button>
+            </div>
+
+        
+        </form>
+        <div id="order-response"></div>
+    </div>
+    
+</body>
+<script  type="module" src="./js/config.js"></script>
+<script  type="module" src="./js/apis/api.js"></script>
+<script  type="module" src="./js/order/api.js"></script>
+<script  type="module" src="./js/order/order.js"></script>
+<script  type="module" src="./js/order/esopDiv.js"></script>
+<script  type="module" src="./js/order/orderData.js"></script>
+<script  type="module" src="./js/index.js"></script>
+</html>
