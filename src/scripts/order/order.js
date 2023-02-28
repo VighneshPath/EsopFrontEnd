@@ -8,9 +8,6 @@ class Order{
     this.apiClient = apiClient;
   }
   placeOrder = (event, orderData)=>{
-    console.log(this);
-    console.log(event);
-    console.log(orderData);
     createOrder(
       this.apiClient,
       orderData,
@@ -33,8 +30,6 @@ class Order{
       orderDetails += `<div style="clear: both;"><p class="alignleft">${details}</p> <p class="alignright">${orderResponse[details]}</p></div>`;
     }
   
-    console.log(orderDetails);
-  
     let successfulOrderDetails = `
         <div>
             <h1>
@@ -50,10 +45,7 @@ class Order{
     `;
   
     let formBody = document.getElementById("place-order-form");
-    console.log("1");
-    console.log(formBody);
     //document.getElementById("order-content").removeChild(formBody);
-    console.log("2");
     let orderResponseDiv = document.getElementById("order-response");
     orderResponseDiv.innerHTML = successfulOrderDetails;
   };

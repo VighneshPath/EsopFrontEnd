@@ -13,6 +13,7 @@ const createOrder = (
       if (response.ok) {
         return response.json();
       }
+      console.log(response);
       return Promise.reject(response);
     })
     .then((data) => {
