@@ -3,7 +3,9 @@ import { APIClient } from "../src/scripts/apis/client.js";
 
 
 global.document.getElementById = jest.fn((id)=>{
-    return document.createElement(id = id.substring(1, id.length));
+    let newElement = document.createElement("div");
+    newElement.id = id.substring(1, id.length);
+    return newElement;
 })
 
 
