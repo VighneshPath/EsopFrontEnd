@@ -1,0 +1,24 @@
+div h3.banner {
+  text-align: center;
+  margin: 30px;
+}
+
+#order-history-table {
+  border-collapse: collapse;
+  margin: auto;
+  width: 80%;
+}
+
+#order-history-table td,
+#order-history-table th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#order-history-table th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #adf1d2;
+  color: black;
+}
