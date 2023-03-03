@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">77.41% </span>
+                <span class="strong">77.14% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>24/31</span>
+                <span class='fraction'>27/35</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">77.41% </span>
+                <span class="strong">77.14% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>24/31</span>
+                <span class='fraction'>27/35</span>
             </div>
         
             
@@ -140,13 +140,17 @@
 <a name='L75'></a><a href='#L75'>75</a>
 <a name='L76'></a><a href='#L76'>76</a>
 <a name='L77'></a><a href='#L77'>77</a>
-<a name='L78'></a><a href='#L78'>78</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L78'></a><a href='#L78'>78</a>
+<a name='L79'></a><a href='#L79'>79</a>
+<a name='L80'></a><a href='#L80'>80</a>
+<a name='L81'></a><a href='#L81'>81</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
@@ -166,6 +170,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
@@ -187,7 +192,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -196,7 +202,6 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -209,6 +214,7 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -220,11 +226,12 @@
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import {getOrderDataFromOrderForm} from "./orderData.js";
 import {createOrder} from "./api.js"
 import { APIClient } from "../apis/client.js";
-&nbsp;
+import {CustomDocument} from "../docs/doc.js"
 &nbsp;
 class Order{
-  constructor(apiClient){
+  constructor(apiClient, customDoc){
     this.apiClient = apiClient;
+    this.customDoc = customDoc;
   }
   placeOrder = (event, orderData)=&gt;{
     createOrder(
@@ -243,6 +250,7 @@ class Order{
   };
   
   successfulOrder = (orderResponse) =&gt; {
+    console.log("SUCCESS CALLED");
     let orderDetails = "";
   
     for (let details in orderResponse) {
@@ -263,19 +271,19 @@ class Order{
         &lt;/div&gt;
     `;
   
-    let formBody = document.getElementById("place-order-form");
-    //document.getElementById("order-content").removeChild(formBody);
-    let orderResponseDiv = document.getElementById("order-response");
+    let formBody = this.customDoc.getElement("place-order-form");
+    console.log(this.customDoc);
+    this.customDoc.getElement("order-content").removeChild(formBody);
+    let orderResponseDiv = this.customDoc.getElement("order-response");
     orderResponseDiv.innerHTML = successfulOrderDetails;
   };
   
   unSuccessfulOrder = (errors) =&gt; {
-    console.log(errors);
     let errorDetails = "";
     for (let error in errors) {
       errorDetails += `&lt;p class="error-message"&gt;${errors[error]}&lt;/p&gt;`;
     }
-    let orderResponseDiv = document.getElementById("order-response");
+    let orderResponseDiv = this.customDoc.getElement("order-response");
     orderResponseDiv.innerHTML = errorDetails;
   };
 }
@@ -289,7 +297,8 @@ document.addEventListener("DOMContentLoaded", <span class="fstat-no" title="func
 <span class="cstat-no" title="statement not covered" >  selectForm.addEventListener("submit", <span class="fstat-no" title="function not covered" >(e</span>vent)=&gt;{</span>
     let apiClient = <span class="cstat-no" title="statement not covered" >new APIClient();</span>
     let orderData = <span class="cstat-no" title="statement not covered" >getOrderDataFromOrderForm();</span>
-    let order = <span class="cstat-no" title="statement not covered" >new Order(apiClient); </span>
+    let customDoc = <span class="cstat-no" title="statement not covered" >new CustomDocument(document);</span>
+    let order = <span class="cstat-no" title="statement not covered" >new Order(apiClient, customDoc); </span>
 <span class="cstat-no" title="statement not covered" >    order.placeOrder(event, orderData);</span>
   });
 })
@@ -301,7 +310,7 @@ export {temp, Order}</pre></td></tr></table></pre>
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-02-28T03:27:14.612Z
+                at 2023-03-03T04:46:07.925Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

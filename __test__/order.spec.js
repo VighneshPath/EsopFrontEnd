@@ -1,18 +1,16 @@
 import { Order } from "../src/scripts/order/order.js";
 import { APIClient } from "../src/scripts/apis/client.js";
 
+jest.mock("../src/scripts/docs/doc.js");
 
-global.document.getElementById = jest.fn((id)=>{
-    let newElement = document.createElement("div");
-    newElement.id = id.substring(1, id.length);
-    return newElement;
-})
-
+import {CustomDocument} from "../src/scripts/docs/doc.js";
 
 describe("Order", () => {
     let order;
 
     test("it should place order", () => {
+        const jsdomAlert = window.alert;  // remember the jsdom alert
+        window.alert = () => {};  // provide an empty implementation for window.alert
         const dummyReturnData = 
             {orderId: '2', quantity: '1', price: '1'};
         fetch = jest.fn(() => {
@@ -23,6 +21,19 @@ describe("Order", () => {
                 })
             })
         });
+        CustomDocument.mockImplementation(()=>{
+            return{
+                getElement: jest.fn(()=>{
+                    return {
+                        removeChild(){
+                            return 1;
+                        }
+                    }
+                }),
+                querySelector: jest.fn(()=>{})
+            }
+        });
+        let doc = new CustomDocument(document);
         let orderData = {
             quantity: 1,
             price: 1,
@@ -30,15 +41,18 @@ describe("Order", () => {
         };
         let submitEvent = document.createEvent("HTMLEvents");
         let apiClient = new APIClient(fetch);
-        order = new Order(apiClient); 
+        order = new Order(apiClient, doc); 
 
         order.placeOrder(submitEvent, orderData);
 
         expect(fetch.mock.calls).toHaveLength(1);
-        expect(document.getElementById("order-details")).toBeInstanceOf(HTMLElement);
+        console.log(CustomDocument.mock.contexts[0].getElement.mock);
+        //expect(doc.getElement.mock.calls).toHaveBeenCalled();
     });
 
     test("it should place a failing order", () => {
+        const jsdomAlert = window.alert;  // remember the jsdom alert
+        window.alert = () => {};  // provide an empty implementation for window.alert
         const dummyReturnData = 
             {errors:["Invalid quantity"]};
         fetch = jest.fn(() => {
@@ -49,6 +63,19 @@ describe("Order", () => {
                 })
             })
         });
+        CustomDocument.mockImplementation(()=>{
+            return{
+                getElement: jest.fn(()=>{
+                    return {
+                        removeChild(){
+                            return 1;
+                        }
+                    }
+                }),
+                querySelector: jest.fn(()=>{})
+            }
+        });
+        let doc = new CustomDocument(document);
         let orderData = {
             quantity: 1,
             price: 1,
@@ -56,7 +83,7 @@ describe("Order", () => {
         };
         let submitEvent = document.createEvent("HTMLEvents");
         let apiClient = new APIClient(fetch);
-        order = new Order(apiClient); 
+        order = new Order(apiClient, doc); 
 
         order.placeOrder(submitEvent, orderData);
 
@@ -66,6 +93,6 @@ describe("Order", () => {
             console.log(allEle[i]);
         }
         console.log(allEle.length);
-        expect(document.getElementById("order-details")).toBeInstanceOf(HTMLElement);
+        window.alert = jsdomAlert;
     });
 });

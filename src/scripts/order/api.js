@@ -13,15 +13,12 @@ const createOrder = (
       if (response.ok) {
         return response.json();
       }
-      console.log(response);
       return Promise.reject(response);
     })
     .then((data) => {
-      console.log(data);
       successResponse(data);
     })
     .catch((error) => {
-      console.log(error);
       error.json().then((json) => failureResponse(json));
     });
 };
@@ -38,7 +35,6 @@ const getOrderHistory = (
       return Promise.reject(response);
     })
     .then((data) => {
-      console.log(data);
       successResponse(data);
     });
 };

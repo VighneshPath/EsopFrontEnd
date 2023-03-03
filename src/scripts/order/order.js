@@ -1,11 +1,12 @@
 import {getOrderDataFromOrderForm} from "./orderData.js";
 import {createOrder} from "./api.js"
 import { APIClient } from "../apis/client.js";
-
+import {CustomDocument} from "../docs/doc.js"
 
 class Order{
-  constructor(apiClient){
+  constructor(apiClient, customDoc){
     this.apiClient = apiClient;
+    this.customDoc = customDoc;
   }
   placeOrder = (event, orderData)=>{
     createOrder(
@@ -24,6 +25,7 @@ class Order{
   };
   
   successfulOrder = (orderResponse) => {
+    console.log("SUCCESS CALLED");
     let orderDetails = "";
   
     for (let details in orderResponse) {
@@ -44,19 +46,19 @@ class Order{
         </div>
     `;
   
-    let formBody = document.getElementById("place-order-form");
-    //document.getElementById("order-content").removeChild(formBody);
-    let orderResponseDiv = document.getElementById("order-response");
+    let formBody = this.customDoc.getElement("place-order-form");
+    console.log(this.customDoc);
+    this.customDoc.getElement("order-content").removeChild(formBody);
+    let orderResponseDiv = this.customDoc.getElement("order-response");
     orderResponseDiv.innerHTML = successfulOrderDetails;
   };
   
   unSuccessfulOrder = (errors) => {
-    console.log(errors);
     let errorDetails = "";
     for (let error in errors) {
       errorDetails += `<p class="error-message">${errors[error]}</p>`;
     }
-    let orderResponseDiv = document.getElementById("order-response");
+    let orderResponseDiv = this.customDoc.getElement("order-response");
     orderResponseDiv.innerHTML = errorDetails;
   };
 }
@@ -70,7 +72,8 @@ document.addEventListener("DOMContentLoaded", ()=>{
   selectForm.addEventListener("submit", (event)=>{
     let apiClient = new APIClient();
     let orderData = getOrderDataFromOrderForm();
-    let order = new Order(apiClient); 
+    let customDoc = new CustomDocument(document);
+    let order = new Order(apiClient, customDoc); 
     order.placeOrder(event, orderData);
   });
 })
