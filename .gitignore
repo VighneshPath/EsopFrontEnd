@@ -1,26 +1,6 @@
-# See http://help.github.com/ignore-files/ for more about ignoring files.
-
-# Mac OS X
-.DS_Store
-._.*
-._*
-
-# Ignore local editor
-.project
-.settings
-.idea
-*.swp
-tags
-nbproject/*
-
-# Windows
-Thumbs.db
-
-# Debugging related
+node_modules
+client/public/
 npm-debug.log
+git
+jest_0
 
-# Dependency packages files
-node_modules/
-
-# Output
-dist/

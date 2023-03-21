@@ -1,5 +1,21 @@
 import OrderAPI from "../../order/api";
 
+
+global.fetch = jest.fn((url) =>
+  Promise.resolve({
+    json: () => Promise.resolve({
+      price: 1,
+      quantity: 2,
+      type: "BUY",
+      OrderId: 1
+    }),
+  })
+);
+
+beforeEach(() => {
+  fetch.mockClear();
+});
+
 class OrderAPIStub extends OrderAPI {
   createOrder = (
     data,
@@ -16,7 +32,7 @@ class OrderAPIStub extends OrderAPI {
 
 describe("Order API test", () => {
   test("it should create an order given required order data", () => {
-    let orderAPIStub = new OrderAPIStub();
+    let orderAPIStub = new OrderAPI();
     let data = {
       price: 1,
       quantity: 2,
@@ -29,6 +45,7 @@ describe("Order API test", () => {
       },
       () => {}
     );
+    
   });
 
   test("it should return error given improper order data", () => {
