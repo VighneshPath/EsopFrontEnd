@@ -1,20 +1,20 @@
+import { api } from "../apis/api.js";
+import { config } from "../config.js";
+
 export default class OrderHistoryAPI {
-  getOrderHistory = (
-    successResponse = () => {},
-    failureResponse = () => {}
-  ) => {
-    fetch(api.user.order.orderHistory(config.userName))
-      .then((response) => {
-        if (response.ok) {
-          return response.json();
+  getOrderHistory = () => {
+    return fetch(api.user.order.orderHistory(config.userName))
+      .then((response) => response.json()).then((data) => {
+        if (data.ok) {
+          return data;
         }
-        return Promise.reject(response);
+        return Promise.reject(data);
       })
       .then((data) => {
-        successResponse(data);
+        return data
       })
       .catch((error) => {
-        error.json().then((json) => failureResponse(json));
+        error.json().then((json) => {return json});
       });
   };
 }

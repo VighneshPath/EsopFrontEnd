@@ -1,53 +1,41 @@
-import OrderHistoryAPI from "../../orderHistory/api.js";
+import { api } from "../../apis/api";
+import { config } from "../../config";
+import OrderHistoryAPI from "../../orderHistory/api";
 
-const orderData = {
-  order: {
-    id: 1,
-    price: 3,
-  },
-};
+describe("OrderHistory API test", () => {
+  test("it should return an order history", async () => {
+    let mockResponse = { ok: true };
 
-class OrderHistoryAPIStub extends OrderHistoryAPI {
-  constructor(promise) {
-    super();
-    this.promise = promise;
-  }
+    const orderHistoryAPI = new OrderHistoryAPI();
 
-  getOrderHistory = (
-    successResponse = () => {},
-    failureResponse = () => {}
-  ) => {
-    this.promise
-      .then((response) => {
-        successResponse(response);
-      })
-      .catch((error) => {
-        failureResponse(error);
+    const fetchMock = jest.fn().mockImplementation(() => {
+      return Promise.resolve({
+        json: () => Promise.resolve(mockResponse),
       });
-  };
-}
-
-describe("Order history API test", () => {
-  test("it should return order history", () => {
-    let successPromise = new Promise((resolve) => {
-      resolve(orderData);
     });
+    global.fetch = fetchMock;
 
-    const orderHistoryAPIStub = new OrderHistoryAPIStub(successPromise);
-    orderHistoryAPIStub.getOrderHistory(
-      (response) => expect(response).toEqual(orderData),
-      () => {}
+    let response = await orderHistoryAPI.getOrderHistory();
+
+    expect(fetchMock).toHaveBeenCalledWith(
+      api.user.order.orderHistory(config.userName)
     );
+    expect(fetchMock).toHaveBeenCalledTimes(1);
+    expect(response).toEqual(mockResponse);
   });
 
-  test("it should return an error message", () => {
-    let failurePromise = new Promise((resolve, reject) => {
-      reject(new Error("No data to send"));
-    });
-    const orderHistoryAPIStub = new OrderHistoryAPIStub(failurePromise);
-    orderHistoryAPIStub.getOrderHistory(
-      () => {},
-      (err) => expect(err.message).toEqual("No data to send")
-    );
-  });
+  // test("it should return error given improper order data", async () => {
+  //   let orderAPI = new OrderAPI();
+  //   let data = null;
+  //   let mockResponse = { ok: true };
+  //   const fetchMock = jest.fn().mockImplementation(() => {
+  //     return Promise.resolve({
+  //       json: () => Promise.resolve(mockResponse),
+  //     });
+  //   });
+  //   global.fetch = fetchMock;
+  //   const response = await orderAPI.createOrder(data);
+  //   expect(response).toEqual(mockResponse);
+  // });
+  
 });
